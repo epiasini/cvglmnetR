@@ -5,7 +5,7 @@ function fit = cvglmnetR(x, y, family, options, type, nfolds, foldid, parallel)
     % "cvglmnet.from.matlab.R", that has to be in the folder where MATLAB
     % is run. Obviously needs a working distribution of R, with the
     % "glmnet" and "R.matlab" packages. Only tested with the 'binomial'
-    % family of models.
+    % family of models, under Linux and Mac OSX.
 
     % debug switch. Set this to 'true' to enable logging from glmnet. This
     % will create one '.log' file in the system's temporary folder each
