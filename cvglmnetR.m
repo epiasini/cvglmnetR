@@ -52,10 +52,11 @@ function fit = cvglmnetR(x, y, family, options, type, nfolds, foldid, parallel)
     end
     
     % save data and parameters for fit to temporary file and call R
+    r_script = fullfile(fileparts(which('cvglmnetR')), 'cvglmnet.from.matlab.R');
     save(data_filename_input, '-struct', 'options');
     save(data_filename_input, 'x', 'y', 'family', 'type', 'nfolds', 'foldid', 'parallel', '-append');
-    command = sprintf('R CMD BATCH %s''--args %s'' cvglmnet.from.matlab.R %s',...
-        r_opts, temp_filename, r_out_file);
+    command = sprintf('R CMD BATCH %s''--args %s'' %s %s',...
+        r_opts, temp_filename, r_script, r_out_file);
     system(command);
     
     % rename results fields and package the glmnet_fit object into a nested
@@ -66,7 +67,7 @@ function fit = cvglmnetR(x, y, family, options, type, nfolds, foldid, parallel)
     fit.class = 'cv.glmnet';
     
     fit.glmnet_fit = struct();
-    fit.glmnet_fit.a0 = fit.fa0;
+    fit.glmnet_fit.a0 = reshape(fit.fa0, [], 1);
     fit.glmnet_fit.label = fit.fclassnames;
     fit.glmnet_fit.beta = fit.fbeta;
     fit.glmnet_fit.dev = fit.fdevratio;

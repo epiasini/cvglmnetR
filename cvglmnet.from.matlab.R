@@ -27,9 +27,18 @@ if (exists("lambda.min", where=input)) {
 # make sure scalar parameters are actually scalars and not 1x1 matrices
 input[lapply(input, length) == 1] <- lapply(input[lapply(input, length) == 1], `[[`, 1)
 
+# make sure foldid is a vector and not an nx1 or 1xn matrix
+input$foldid <- as.vector(input$foldid)
+
 # make sure logical parameters are actually logical and not 1/0
 logical.parameter.names <- c("standardize", "intercept", "standardize.resp", "parallel")
 input[logical.parameter.names] <- lapply(input[logical.parameter.names], as.logical)
+
+# if necessary, register a parallel environment
+if (input$parallel) {
+    library(doParallel)
+    registerDoParallel()
+}
 
 # each element of "input" should now correspond (name and class) to
 # one argument to cv.glmnet, with the exception of "cl" and "lambda.min"

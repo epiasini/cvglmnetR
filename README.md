@@ -11,20 +11,19 @@ workaround for some bugs specific to the MATLAB version of the
 package.
 
 Although some effort has been made to make this into something fairly
-generic, cvglmnetR has been only tested with the 'binomial' family of
-models, under Linux and Mac OSX.
+generic, cvglmnetR has been only tested with the 'binomial' and
+'gaussian' family of models, under Linux and Mac OSX.
 
 This is nothing more than a quick hack; use at your own risk. Bug
-reports and pull requests are welcome, but please consider if you
-shouldn't be helping out with
-[the original MATLAB version of glmnet](http://web.stanford.edu/~hastie/glmnet_matlab/index.html)
-instead.
+reports and pull requests are welcome.
 
 Requirements
 ------------
 
 Besides MATLAB with "glmnet in MATLAB", you will need a recent R
-distribution with `glmnet` and `R.matlab` installed.
+distribution with `glmnet` and `R.matlab` installed. `doParallel` is
+optional, and only necessary to make use of the parallel features of
+glmnet.
 
 Usage
 -----
@@ -34,6 +33,9 @@ The `cvglmnetR` function accepts the same arguments as `cvglmnet` from
 structure with the same fields as that returned by
 `cvglmnet`. Functions such as `cvglmnetPredict` and `cvglmnetPlot`
 should work when given this structure as the `cvfit` argument.
+
+Note that if the `parallel` option is true, a parallel backend is
+automatically registered by calling `registerDoParallel()`.
 
 For further details, see the documentation for `cvglmnet`.
 
