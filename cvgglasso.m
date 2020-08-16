@@ -30,7 +30,7 @@ function fit = cvgglasso(x, y, group, options, foldid)
     options = struct(options);
     
     % save data and parameters for fit to temporary file and call R
-    r_script = fullfile(fileparts(which('cvSGL')), 'gglasso.from.matlab.R');
+    r_script = fullfile(fileparts(which('cvSGL')), 'cvgglasso.from.matlab.R');
     save(data_filename_input, '-struct', 'options');
     save(data_filename_input, 'x', 'y', 'group', 'foldid', '-append');
     command = sprintf('R CMD BATCH %s''--args %s'' %s %s',...
