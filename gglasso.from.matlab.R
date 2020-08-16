@@ -57,10 +57,11 @@ fit <- do.call(cv.gglasso, gglasso.args)
 writeMat(output.filename, scalingcenter=scaling.center, scalingscale=scaling.scale,
          lambda=fit$lambda, cvm=fit$cvm, cvsd=fit$cvsd,
          cvupper=fit$cvupper, cvlower=fit$cvlower, name=fit$name, lambdamin=fit$lambda.min,
-         lambda1se=fit$lambda.1se, fcall=fit$gglasso.fit$call, fb0=fit$gglasso.fit$call,
+         lambda1se=fit$lambda.1se, fcall=toString(fit$gglasso.fit$call), fb0=fit$gglasso.fit$b0,
          fbeta=fit$gglasso.fit$beta, fdf=fit$gglasso.fit$df, fdim=fit$gglasso.fit$dim,
          flambda=fit$gglasso.fit$lambda, fnpasses=fit$gglasso.fit$npasses,
          fjerr=fit$gglasso.fit$jerr, fgroup=fit$gglasso.fit$group)
+
 ## Local Variables:
 ## mode: R
 ## coding: utf-8-unix
