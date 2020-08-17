@@ -1,10 +1,18 @@
 function fit = cvgglasso(x, y, group, options, foldid)
+    %CVGGLASSO simple matlab-to-R wrapper for (a subset of)
+    %gglasso.
+    %
+    %   Note that if options.standardize=true, the predictors will
+    %   be standardized (and their center and scale returned as
+    %   scaling_center and scaling_scale). It is up to the user to
+    %   keep this in mind when interpreting the fitted coefficients
+    %   and making predictions.
     
     % debug switch. Set this to 'true' to enable logging from glmnet. This
     % will create one '.log' file in the system's temporary folder each
     % time this function is called. Note that these files are purposely
     % *not* removed at the end of the function! Use with caution.
-    debug = true;
+    debug = false;
     
     % generate a random name for the temporary files that will be used to
     % exchange data between MATLAB and R.
@@ -58,7 +66,7 @@ function fit = cvgglasso(x, y, group, options, foldid)
     
     fit = rmfield(fit, {'scalingcenter', 'scalingscale', 'lambdamin', ...
                         'lambda1se', 'fcall', 'fb0', 'fbeta', 'fdf', ...
-                        'fdim', 'flambda', 'fnpasses', 'fjerr', 'fgroup'})
+                        'fdim', 'flambda', 'fnpasses', 'fjerr', 'fgroup'});
                         
     % clean up temporary files
     %    delete(data_filename_input);

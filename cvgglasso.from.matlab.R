@@ -54,13 +54,16 @@ fit <- do.call(cv.gglasso, gglasso.args)
 # save the results of the fit in a file that can be read back into
 # matlab. Note that we have to get rid of all dots inside variable
 # names, and that we avoid saving nested structures.
-writeMat(output.filename, scalingcenter=scaling.center, scalingscale=scaling.scale,
+writeMat(output.filename, standardize=input$standardize,
+         scalingcenter=scaling.center, scalingscale=scaling.scale,
          lambda=fit$lambda, cvm=fit$cvm, cvsd=fit$cvsd,
-         cvupper=fit$cvupper, cvlower=fit$cvlower, name=fit$name, lambdamin=fit$lambda.min,
-         lambda1se=fit$lambda.1se, fcall=toString(fit$gglasso.fit$call), fb0=fit$gglasso.fit$b0,
-         fbeta=fit$gglasso.fit$beta, fdf=fit$gglasso.fit$df, fdim=fit$gglasso.fit$dim,
-         flambda=fit$gglasso.fit$lambda, fnpasses=fit$gglasso.fit$npasses,
-         fjerr=fit$gglasso.fit$jerr, fgroup=fit$gglasso.fit$group)
+         cvupper=fit$cvupper, cvlower=fit$cvlower, name=fit$name,
+         lambdamin=fit$lambda.min, lambda1se=fit$lambda.1se,
+         fcall=toString(fit$gglasso.fit$call), fb0=fit$gglasso.fit$b0,
+         fbeta=fit$gglasso.fit$beta, fdf=fit$gglasso.fit$df,
+         fdim=fit$gglasso.fit$dim, flambda=fit$gglasso.fit$lambda,
+         fnpasses=fit$gglasso.fit$npasses, fjerr=fit$gglasso.fit$jerr,
+         fgroup=fit$gglasso.fit$group)
 
 ## Local Variables:
 ## mode: R
