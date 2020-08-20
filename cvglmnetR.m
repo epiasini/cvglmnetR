@@ -48,7 +48,11 @@ function fit = cvglmnetR(x, y, family, options, type, nfolds, foldid, parallel)
         r_out_file = [temp_filename, '.log'];
     else
         r_opts = '--no-save --no-restore --no-timing --slave ';
-        r_out_file = '/dev/null';
+        if ispc
+            r_out_file = 'NUL';
+        else
+            r_out_file = '/dev/null';
+        end
     end
     
     % save data and parameters for fit to temporary file and call R
