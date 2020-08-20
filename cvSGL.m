@@ -1,10 +1,10 @@
-function fit = cvGglasso(x, y, index, options, foldid)
+function fit = cvSGL(x, y, index, options, foldid)
     
     % debug switch. Set this to 'true' to enable logging from glmnet. This
     % will create one '.log' file in the system's temporary folder each
     % time this function is called. Note that these files are purposely
     % *not* removed at the end of the function! Use with caution.
-    debug = true;
+    debug = false;
     
     % generate a random name for the temporary files that will be used to
     % exchange data between MATLAB and R.
