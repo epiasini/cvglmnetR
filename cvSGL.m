@@ -22,7 +22,11 @@ function fit = cvSGL(x, y, index, options, foldid)
         r_out_file = [temp_filename, '.log'];
     else
         r_opts = '--no-save --no-restore --no-timing --slave ';
-        r_out_file = '/dev/null';
+        if ispc
+            r_out_file = 'NUL';
+        else
+            r_out_file = '/dev/null';
+        end
     end
     
     % convert options from SGLSet object to simple struct. This is
