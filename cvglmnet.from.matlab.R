@@ -3,7 +3,7 @@ library(glmnet)
 
 # get name of file containing data and options for the fit and load it
 args <- commandArgs(trailingOnly = TRUE)
-temp.name <- args[[1]]
+temp.name <- paste(args, collapse=' ') # this is a workaround to deal with paths with whitespace in them
 input.filename <- paste(temp.name, ".in.mat", sep="")
 output.filename <- paste(temp.name, ".out.mat", sep="")
 
