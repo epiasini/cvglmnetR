@@ -77,7 +77,7 @@ for fit_id = 1:2
     xlabel("Fitted beta")
     ylabel("True beta")
     
-    %% Plot linear model predictions
+    %% Plot model predictions
     % In the same way, we can use the function provided by "glmnet in matlab"
     % for computing predictions (and as above, this can also be done by hand if
     % needed).
