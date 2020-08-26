@@ -17,6 +17,11 @@ function fit = cvgglasso(x, y, group, options, foldid)
     % generate a random name for the temporary files that will be used to
     % exchange data between MATLAB and R.
     temp_filename = tempname;
+    if ispc
+        % if we are on Windows, sanitize the temporary file name to a
+        % format that makes both matlab and R happy
+        temp_filename = strrep(temp_filename, '\', '\\');
+    end
     data_filename_input = [temp_filename, '.in.mat'];
     data_filename_output = [temp_filename, '.out.mat'];
     
@@ -44,9 +49,10 @@ function fit = cvgglasso(x, y, group, options, foldid)
     % save data and parameters for fit to temporary file and call R
     r_script = fullfile(fileparts(which('cvSGL')), 'cvgglasso.from.matlab.R');
     save(data_filename_input, '-struct', 'options');
-    save(data_filename_input, 'x', 'y', 'group', 'foldid', '-append');
-    command = sprintf('R CMD BATCH %s''--args %s'' %s %s',...
-        r_opts, temp_filename, r_script, r_out_file);
+    save(data_filename_input, 'x', 'y', 'group', 'foldid', ['-' ...
+                        'append']);
+    command = sprintf("R CMD BATCH %s ""--args %s"" ""%s"" ""%s"" ",...
+        r_opts, temp_filename, r_script, r_out_file);    
     system(command);
     
     % rename results fields and package the SGL fit object into a nested
