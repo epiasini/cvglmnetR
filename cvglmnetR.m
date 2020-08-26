@@ -29,6 +29,20 @@ function fit = cvglmnetR(x, y, family, options, type, nfolds, foldid, parallel)
             class = 'fishnet';
     end
     
+    % set up default arguments
+    if nargin < 5
+        type = 'deviance';
+    end
+    if nargin < 6
+        nfolds = 10;
+    end
+    if nargin < 7
+        foldid = [];
+    end
+    if nargin < 8
+        parallel = false;
+    end
+    
     % generate a random name for the temporary files that will be used to
     % exchange data between MATLAB and R.
     temp_filename = tempname;
@@ -76,7 +90,13 @@ function fit = cvglmnetR(x, y, family, options, type, nfolds, foldid, parallel)
     fit.class = 'cv.glmnet';
     
     fit.glmnet_fit = struct();
-    fit.glmnet_fit.a0 = reshape(fit.fa0, [], 1);
+    fit.glmnet_fit.a0 = fit.fa0;
+    if strcmp(family, 'gaussian')
+        % this is a workaround needed to ensure compatibility with the
+        % "glmnet in matlab" functions such as glmnetPredict, which
+        % transpose a0 (or not) depending on the family.
+        fit.glmnet_fit.a0 = fit.glmnet_fit.a0';
+    end
     fit.glmnet_fit.label = fit.fclassnames;
     fit.glmnet_fit.beta = fit.fbeta;
     fit.glmnet_fit.dev = fit.fdevratio;
