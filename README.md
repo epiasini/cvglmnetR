@@ -1,7 +1,7 @@
 cvglmnetR.m
 ===========
 
-[![DOI:10.5281/zenodo.3568315](https://zenodo.org/badge/DOI/10.5281/zenodo.3568315.svg)](https://doi.org/10.5281/zenodo.3568315)
+[![DOI:10.5281/zenodo.3568314](https://zenodo.org/badge/DOI/10.5281/zenodo.3568314.svg)](https://doi.org/10.5281/zenodo.3568314)
 
 Simple replacement for the 'cvglmnet' function from the
 "[glmnet in MATLAB](http://web.stanford.edu/~hastie/glmnet_matlab/index.html)"
