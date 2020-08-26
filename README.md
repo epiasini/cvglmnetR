@@ -13,10 +13,7 @@ been implemented for the R version of the package.
 
 Although some effort has been made to make this into something fairly
 generic, cvglmnetR has been only tested with the 'binomial' and
-'gaussian' family of models, under Linux and Mac OSX.
-
-This is nothing more than a quick hack; use at your own risk. Bug
-reports and pull requests are welcome.
+'gaussian' family of models, under Linux, Mac OS and Windows.
 
 Requirements
 ------------
@@ -30,14 +27,28 @@ the R prompt:
 install.packages(c('glmnet', 'R.matlab', 'doParallel'))
 ```
 
-Also, make sure that R is on your PATH. On linux (possibly Mac OS and
-Windows too, this hasn't been tested), sometimes this can cause
-problems if you usually rely on adding custom folders to your PATH
-using `.profile` and similar. In that case you can use the following
-command from the matlab prompt:
+Also, make sure that R is on your PATH. On Linux (and possibly Mac
+OS), this should not require any intervention, but sometimes there can
+be problems if you usually rely on adding custom folders to your PATH
+using `.profile` and similar. On Windows, it seems that by default R
+is not placed on the path when it is installed, so you will need to do
+something about it. 
+
+One way of ensuring the PATH is set as intended is to run something
+like the following command from the matlab prompt:
+
+Linux/Mac OS:
 ```matlab
 setenv('PATH', ['/path/to/R/bin:', getenv('PATH')]);
 ```
+
+Windows:
+```matlab
+setenv('PATH', ['C:\Program Files\R\R-version\bin;', getenv('PATH')])
+```
+
+Taking care to substitute the actual path of your R `bin` folder instead
+of `/path/to/bin` or `C:\Program Files\R\R-version\bin` above.
 
 Usage
 -----
@@ -50,6 +61,8 @@ should work when given this structure as the `cvfit` argument.
 
 Note that if the `parallel` option is true, a parallel backend is
 automatically registered by calling `registerDoParallel()`.
+
+See `example.m` for some basic usage examples.
 
 For further details, see the documentation for `cvglmnet`.
 
@@ -71,3 +84,6 @@ Licensing
 This program is licensed under version 3 of the GPL or any later
 version. See COPYING for details.
 
+Contributing
+------------
+Bug reports and pull requests are welcome.
